@@ -1,2 +1,75 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+import { useState } from "react";
+import {
+  Plus,
+  BookOpen,
+  CreditCard,
+  Send,
+  BarChart2,
+  Bell,
+  Globe,
+  IndianRupee
+} from "lucide-react";
+
+export default function BahiBhaiHome() {
+  const [debt] = useState(2000);
+
+  const actions = [
+    { label: "Add Entry", icon: Plus, color: "bg-blue-500" },
+    { label: "View Ledger", icon: BookOpen, color: "bg-green-500" },
+    { label: "Collect Payment", icon: CreditCard, color: "bg-purple-500" },
+    { label: "Send Reminder", icon: Send, color: "bg-orange-500" },
+    { label: "Reports", icon: BarChart2, color: "bg-indigo-500" },
+    { label: "Notifications", icon: Bell, color: "bg-pink-500" }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans">
+      {/* Top Bar */}
+      <div className="flex justify-between items-center px-5 py-4 bg-white shadow-sm">
+        <h1 className="text-xl font-semibold text-blue-600">Bahi Bhai</h1>
+        <div className="flex gap-3 text-gray-600">
+          <Globe size={18} />
+          <IndianRupee size={18} />
+        </div>
+      </div>
+
+      {/* Debt Banner */}
+      <div className="mx-4 mt-4 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
+        <p className="text-sm opacity-90">Debt &gt; ₹{debt}?</p>
+        <p className="text-xs mt-1 opacity-90">
+          Convert into EMIs and pay at your convenience
+        </p>
+        <button className="mt-3 bg-white text-blue-600 px-4 py-1.5 rounded-lg text-sm font-medium">
+          Know More
+        </button>
+      </div>
+
+      {/* Action Grid */}
+      <div className="grid grid-cols-3 gap-4 px-4 mt-6">
+        {actions.map((item, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-xl shadow-sm flex flex-col items-center justify-center py-5"
+          >
+            <div
+              className={`${item.color} text-white p-3 rounded-xl mb-2`}
+            >
+              <item.icon size={22} />
+            </div>
+            <p className="text-xs font-medium text-gray-700 text-center">
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around py-3 text-xs text-gray-500">
+        <span className="text-blue-600 font-medium">Home</span>
+        <span>Accounts</span>
+        <span>Reports</span>
+        <span>Profile</span>
+      </div>
+    </div>
+  );
+}
